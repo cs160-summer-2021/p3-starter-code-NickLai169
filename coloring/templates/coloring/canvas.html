@@ -159,10 +159,53 @@
 			$( "#stamp_bar" ).click(function() {
 				console.log("awwww");
 			});
-			// $( "#stamp_bar" ).click(function() {
-			// 	alert( "Handler for .click() called." );
-			// 	console.log("awwww");
-			// });
+
+			// document.addEventListener("click", create_paw);
+
+			function create_paw(event) {
+				//This is incomplete, I can't fucking do it
+				console.log("paw placed");
+				var test = paper.SymbolDefinition(new paper.Path.Star(new paper.Point(0, 0), 6, 5, 13));
+				console.log(test);
+				var symbol = paper.SymbolDefinition(paper.project.importSVG("/static/coloring/images/paw.svg"));
+				console.log(symbol);
+				symbol.place(new paper.Point(100, 100));  
+			}
+
+			$("#colorpicker1").click(function() {
+				var x = document.getElementById("colorpicker1").value;
+				cp.history.push(x);
+			});
+			$("#colorpicker2").click(function() {
+				var x = document.getElementById("colorpicker2").value;
+				cp.history.push(x);
+			});
+			$("#colorpicker3").click(function() {
+				var x = document.getElementById("colorpicker3").value;
+				cp.history.push(x);
+			});
+			$("#colorpicker4").click(function() {
+				var x = document.getElementById("colorpicker4").value;
+				cp.history.push(x);
+			});
+			$("#colorpicker5").click(function() {
+				var x = document.getElementById("colorpicker5").value;
+				cp.history.push(x);
+			});
+			$("#colorpicker6").click(function() {
+				var x = document.getElementById("colorpicker6").value;
+				cp.history.push(x);
+			});
+			$("#colorpicker7").click(function() {
+				var x = document.getElementById("colorpicker7").value;
+				cp.history.push(x);
+			});
+			
+
+			// function change_color1(event) {
+			// 	var x = document.getElementById("myColor1").value;
+			// 	console.log(x);
+			// };
 		}
 	</script>
 </head>
@@ -184,23 +227,23 @@
 	<div id="my-color-palette">
 		<div class="container">
 			<div class="row">
-				<input type="color" class="color-inputs" id="colorpicker" style="left: 45%;" value="#795548">
+				<input type="color" class="color-inputs" id="colorpicker1" style="left: 45%;" value="#795548">
 			</div>
 			<div class="row">
-				<input type="color" class="color-inputs" id="colorpicker" style="left: 25%;" value="#ffeb3b">
-				<input type="color" class="color-inputs" id="colorpicker" style="left: 60%;" value="#4caf50">
+				<input type="color" class="color-inputs" id="colorpicker2" style="left: 25%;" value="#ffeb3b">
+				<input type="color" class="color-inputs" id="colorpicker3" style="left: 56%;" value="#4caf50">
 			</div>
 			<div class="row">
-				<input type="color" class="color-inputs" id="colorpicker" style="left: 12%;" value="#00bcd4">
-				<input type="color" class="color-inputs" id="colorpicker" style="left: 70%;" value="#3f51b5">
-			</div>
-			<div class="row" style="height: 3vh;"></div>
-			<div class="row">
-				<input type="color" class="color-inputs" id="colorpicker" style="left: 3%;" value="#9c27b0">
+				<input type="color" class="color-inputs" id="colorpicker4" style="left: 12%;" value="#00bcd4">
+				<input type="color" class="color-inputs" id="colorpicker5" style="left: 70%;" value="#3f51b5">
 			</div>
 			<div class="row" style="height: 3vh;"></div>
 			<div class="row">
-				<input type="color" class="color-inputs" id="colorpicker" style="left: 5%;" value="#f44336">
+				<input type="color" class="color-inputs" id="colorpicker6" style="left: 3%;" value="#9c27b0">
+			</div>
+			<div class="row" style="height: 3vh;"></div>
+			<div class="row">
+				<input type="color" class="color-inputs" id="colorpicker7" style="left: 5%;" value="#f44336">
 			</div>
 		</div>
 	</div>
