@@ -8,3 +8,5 @@ def pages(request):
     return render(request, 'coloring/pages.html')
 def npages(request):
     return render(request, 'coloring/npages.html')
+def addedpages(request):
+    return render(request, 'coloring/addedpages.html')

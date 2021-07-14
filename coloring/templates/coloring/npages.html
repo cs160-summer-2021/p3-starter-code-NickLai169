@@ -1,15 +1,15 @@
 ﻿<!doctype html>
 <html lang="en">
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Bootstrap CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-	<title>Colourastic!</title>
-	<style>
+    <title>Colourastic!</title>
+    <style>
         body {
             background-image: url("https://i.imgur.com/Eh0XzYE.png");
             height: 100%;
@@ -17,16 +17,14 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+
         html {
             height: 100%;
             margin: 0;
         }
-        .pages {
-            display: inline-block;
-            margin-left: 20%;
-        }
+
         .title {
-            margin-top: 8%;
+            margin-top: 4%;
             text-align: center;
             font-family: Comic Sans MS, Comic Sans, cursive font-style: normal;
             font-weight: normal;
@@ -37,32 +35,62 @@
             /* Grey / 900 */
             color: #020202;
         }
-        .mypages{
-            margin-top:15%;
+
+        .mylist {
+            margin-top: 8%;
+            margin-left: 5%;
+            border: solid 3px;
+            border-radius: 25px;
+            border-color: black;
+            height: 75%;
+            width: 90%
         }
-        .MP{
-            font-size:200%;
-            margin-left:10%;
+
+        .images {
+            display: inline-block;
         }
-        .npages {
-            margin-right: 20%;
-            float:right;
-            z-index:2;
+
+        .image {
+            margin-top: 3%;
+            display: inline-block;
+            margin-left: 5%;
         }
-	</style>
+
+        .back {
+            margin-top: 2%;
+            margin-left: 5%;
+            z-index: 5;
+            position: absolute;
+        }
+
+        .add {
+            margin-top: 2%;
+            float: right;
+            margin-right: 4%
+        }
+        .search{
+            margin-top:1%;
+            margin-left:30%;
+        }
+    </style>
 </head>
 <body>
-    <div class="my-pages"></div>
-    <div class="title"><p>Colourastic</p></div>
-    <div class="mypages">
-        <div class="pages">
-            <img src="https://i.imgur.com/MtlhxC0.png" />
-            <p class="MP">My Pages</p>
+    <img src="https://i.imgur.com/TkjN1CO.png" class="back" height="40px" onclick="location.href='pages';" style="cursor: pointer;">
+    <div class="title"><p>New pages</p></div>
+    <div class="mylist">
+        <img src="https://i.imgur.com/q91guRa.png" height="50px" class="search"/>
+        <br />
+        <div class="image" onclick="location.href='pages';" style="cursor: pointer;">
+            <img src="https://i.imgur.com/ZcCFMMz.png" height="400px" ; />
         </div>
-        <div class="npages">
-            <img src="https://i.imgur.com/jJMTMlL.png" onclick="location.href='/coloring/pages/';" style="cursor: pointer;" />
-            <p class="MP">My Pages</p>
+        <div class="image" onclick="location.href='addedpages';" style="cursor: pointer;">
+            <img src="https://i.imgur.com/7SQURHb.jpg" height="400px" ; />
         </div>
+        <div class="image" onclick="location.href='pages';" style="cursor: pointer;">
+            <img src="https://i.imgur.com/D9pOKx2.png" height="400px" ; />
+        </div>
+        <img src="https://i.imgur.com/yYI021U.png" class="add" height="40px" onclick="location.href='npages';" style="cursor: pointer;">
+
     </div>
 </body>
 </html>
