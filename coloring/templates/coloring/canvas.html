@@ -1,0 +1,208 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>P3 Coloring</title>
+
+	<script type="text/javascript" src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>
+
+	<style type="text/css">
+		#color-palette {
+			width: 300px;
+			background-color: #f1f1f1;
+			display: flex;
+			flex-wrap: wrap;
+			position: absolute;
+			top: 0;
+		}
+
+		#my-color-palette {
+			position: absolute;
+			border: 5px solid #8b8b8b;
+			background-color: #f1f1f1;
+			width: 25vw;
+			height: 35vh;
+			bottom: -50px;
+			right: -50px;
+			border-radius: 50%;
+		}
+
+		.swatch {
+			width: 24px;
+			height: 24px;
+			-moz-border-radius: 12px;
+			-webkit-border-radius: 12px;
+			border-radius: 12px;
+			margin: 3px;
+		}
+
+		#myCanvas {
+			padding-left: 0;
+		    padding-right: 0;
+		    margin-left: auto;
+		    margin-right: auto;
+		    display: block;
+		}
+
+		#stamp_bar {
+			position: fixed;
+			border-radius: 5%;
+			border: 5px solid #565242;
+			width: 20vw;
+			background-color: #FFFDD7;
+			overflow-y: scroll;
+			top: 15vh;
+			bottom: 20vh;
+			right: 0;
+		}
+
+		.color-inputs {
+			position: relative;
+			width: 7%;
+			height: 3vh;
+			border-radius: 50%;
+		}
+
+
+
+	</style>
+
+	<script type="text/javascript" canvas="canvas">
+		window.onload = function() {
+			var canvas = document.getElementById('myCanvas');
+
+			// coloring page
+			var mandala = {
+				item: null,
+				lastClicked: null,
+				filePath: '/static/coloring/images/mandala-freepik.svg'
+			};
+
+			// color palette
+			var cp = {
+				history: ["#000000"], // black selected by default
+				options: [],
+				$container: $('#color-palette')
+			}
+
+			function myCustomInteraction() {
+				var tool = new paper.Tool();
+
+				tool.onMouseDown = function (event) {
+				    var hit = mandala.item.hitTest(event.point, { tolerance: 10, fill: true });
+				    if (hit) {
+				    		// Color pallette keeps track of the full history of colors, though we
+				    		// only color in with the most-recent color.
+				        hit.item.fillColor = cp.history[cp.history.length - 1];
+				    }
+				}
+			}
+
+			// create a color palette with the given colors
+			function createColorPalette(colors){
+
+				// create a swatch for each color
+				for (var i = colors.length - 1; i >= 0; i--) {
+					var $swatch = $("<div>").css("background-color", colors[i])
+									   .addClass("swatch");
+					$swatch.click(function(){
+						// add color to the color palette history
+					  	cp.history.push($(this).css("background-color"));
+					});
+					cp.$container.append($swatch);
+				}
+			}
+
+			// loads a set of colors from a json to create a color palette
+			function getColorsCreatePalette(){
+				cp.$container.html(" ");
+				$.getJSON('/static/coloring/vendors/material/material-colors.json', function(colors){
+					var keys = Object.keys(colors);
+					for (var i = keys.length - 1; i >= 0; i--) {
+						cp.options.push(colors[keys[i]][500]);
+					}
+					createColorPalette(cp.options);
+				});
+			}
+
+			function init(custom){
+				paper.setup(canvas);
+				getColorsCreatePalette();
+
+				paper.project.importSVG(mandala.filePath, function(item) {
+					mandala.item = item._children["design-freepik"];
+				    paper.project.insertLayer(0,mandala.item);
+
+				    if (custom) {
+				    	myCustomInteraction();
+				    } else {
+				    	myGradientInteraction();
+				    }
+
+				});
+			}
+
+			// Set up the mandala interactivity.
+			init(true);
+
+
+			document.getElementsByClassName(".color-inputs").onchange = function() {
+				backRGB = this.value;
+				console.log("COLOUR CANGE");
+			}
+			$(".color-inputs").click(function() {
+				console.log("oi cunt");
+			});
+			$( "#stamp_bar" ).click(function() {
+				console.log("awwww");
+			});
+			// $( "#stamp_bar" ).click(function() {
+			// 	alert( "Handler for .click() called." );
+			// 	console.log("awwww");
+			// });
+		}
+	</script>
+</head>
+<body>
+
+	<canvas id="myCanvas" width="750px" height="750px"></canvas>
+	<div id="color-palette"></div>
+
+
+	<div id="stamp_bar">
+		<ul>
+			<div class="row"> Hello </div>
+			<div class="row"> Hello </div>
+			<div class="row"> Hello </div>
+			<div class="row"> Hello </div>
+		</ul>
+	</div>
+
+	<div id="my-color-palette">
+		<div class="container">
+			<div class="row">
+				<input type="color" class="color-inputs" id="colorpicker" style="left: 45%;" value="#795548">
+			</div>
+			<div class="row">
+				<input type="color" class="color-inputs" id="colorpicker" style="left: 25%;" value="#ffeb3b">
+				<input type="color" class="color-inputs" id="colorpicker" style="left: 60%;" value="#4caf50">
+			</div>
+			<div class="row">
+				<input type="color" class="color-inputs" id="colorpicker" style="left: 12%;" value="#00bcd4">
+				<input type="color" class="color-inputs" id="colorpicker" style="left: 70%;" value="#3f51b5">
+			</div>
+			<div class="row" style="height: 3vh;"></div>
+			<div class="row">
+				<input type="color" class="color-inputs" id="colorpicker" style="left: 3%;" value="#9c27b0">
+			</div>
+			<div class="row" style="height: 3vh;"></div>
+			<div class="row">
+				<input type="color" class="color-inputs" id="colorpicker" style="left: 5%;" value="#f44336">
+			</div>
+		</div>
+	</div>
+</body>
+</html>
