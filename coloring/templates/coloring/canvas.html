@@ -90,6 +90,21 @@
 			border-radius: 50%;
 		}
 
+		.stamp-cards {
+			width: 100%;
+			height: 10vh;
+			background-color: white;
+			outline: black;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			
+		}
+
+		.card-image {
+			width: 100%; 
+			height: 100%;
+		}
+
 
 
 	</style>
@@ -115,6 +130,7 @@
 			// stamp or colour
 			var mode = "colour";
 			var temp = null; 
+			var image = '/static/coloring/images/paw.svg';
 
 			// create a color palette with the given colors
 			// function createColorPalette(colors){
@@ -177,9 +193,8 @@
 
 			$("#myCanvas").click(function(event) {
 				//This is incomplete, I can't fucking do it
+				console.log("canvas mode", mode);
 				if (mode == "colour") {
-					console.log("colour mode", event)
-
 					console.log(event.pageX, event.pageY);
 					var hit = mandala.item.hitTest(new paper.Point(event.pageX, event.pageY), { tolerance: 10, fill: true });
 					console.log("hit?", hit);
@@ -190,9 +205,7 @@
 					}
 				}
 				if (mode == "stamp") {
-					paper.project.importSVG('/static/coloring/images/paw.svg', function(item) {
-					console.log(mode);
-					
+					paper.project.importSVG(image, function(item) {
 					
 					temp = item;
 					var child = item._children["design-freepik"];
@@ -206,6 +219,17 @@
 				}
 			});
 
+			$("#paw").click(function(event){
+				image = '/static/coloring/images/paw.svg';
+			});
+			$("#eye").click(function(event){
+				image = '/static/coloring/images/eye.svg';
+			});
+			$("#claw").click(function(event){ //Doesn't actually work because claw was originally a png
+				image = '/static/coloring/images/claw.svg';
+			});
+
+
 			$("#pen").click(function(event) {
 				mode = "colour";
 			});
@@ -213,7 +237,7 @@
 				mode = "stamp";
 			});
 
-			//marker
+
 			$("#colorpicker1").click(function() {
 				var x = document.getElementById("colorpicker1").value;
 				cp.history.push(x);
@@ -252,7 +276,9 @@
 	</script>
 </head>
 <body>
-
+	<a href="">
+		<img src="/static/coloring/images/return.svg" alt="">
+	</a>
 	<canvas id="myCanvas" width="750px" height="750px"></canvas>
 
 	<div class="container"id="toolbar" >
@@ -277,11 +303,36 @@
 		</div>
 	</div>
 	<div id="stamp_bar">
-		<ul>
-			<div class="row"> Hello </div>
-			<div class="row"> Hello </div>
-			<div class="row"> Hello </div>
-			<div class="row"> Hello </div>
+		<ul style="padding-left: 0;">
+			<li>
+				<div class="row stamp-cards"> 
+					<img class="card-image" id="paw" src="/static/coloring/images/paw.svg" alt="">
+				</div>
+			</li>
+			<li></li>
+			<li>
+				<div class="row stamp-cards"> 
+					<img class="card-image" id="eye" src="/static/coloring/images/eye.svg" alt="">
+				</div>
+			</li>
+			<li></li>
+			<li>
+				<div class="row stamp-cards"> 
+					<img class="card-image" id="claw" src="/static/coloring/images/claw.svg" alt="">
+				</div>
+			</li>
+			<li></li>
+			<li>
+				<div class="row stamp-cards"> 
+					<img class="card-image" src="/static/coloring/images/laptop.svg" alt="">
+				</div>
+			</li>
+			<li></li>
+			<li>
+				<div class="row stamp-cards"> 
+					<img class="card-image"src="/static/coloring/images/paw.svg" alt="">
+				</div>
+			</li>
 		</ul>
 	</div>
 
